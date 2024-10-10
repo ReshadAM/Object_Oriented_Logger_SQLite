@@ -1,0 +1,62 @@
+
+Simple Logging System in C++ with SQLite
+Project Overview
+This project involves building a simple logging system in C++ that uses SQLite as a lightweight embedded database for storing log messages. The project runs on a Unix/Linux environment, such as Raspberry Pi Desktop or any similar system.
+
+Objectives
+The goal is to implement a logging system where:
+
+Each application that uses the logger will have its own table in an SQLite database.
+Log messages are stored with timestamps in a table, and you can retrieve and display them as needed.
+Features
+Logger Class:
+
+The logger class is responsible for writing and reading log messages for a specific app. It interacts with an SQLite database to store and retrieve log data.
+Key methods:
+
+logger(app_name): Constructor that initializes the logger for a given application name.
+~logger(): Destructor that ensures the database connection is closed.
+write(message): Logs a message with the current timestamp.
+read_all(): Retrieves all log messages for the app, including their timestamps, from the database.
+Log Message Class:
+
+The log_message class is a data structure to hold individual log messages. Each log message contains two main pieces of data:
+The message text.
+The timestamp when the message was logged.
+Key methods:
+
+log_message(text, timestamp): Constructor for initializing the message and timestamp.
+get_message(): Returns the text of the log message.
+get_timestamp(): Returns the timestamp of when the message was logged.
+SQLite Integration:
+
+SQLite is used as the backend to store the logs. Each application that uses the logger has its own table in the database, and each table stores log entries as rows with columns for the timestamp and the message.
+SQL queries are used to insert and retrieve log messages, using the SQLite API for C++.
+Example Applications
+Log Generator App:
+
+This is a sample application that generates and logs random messages.
+The app selects random messages from a provided set, logs them, and sleeps for a random interval between logging actions. The process repeats until the app is manually terminated.
+Log Dumper App:
+
+This app retrieves and displays the log messages for a specific application.
+The messages are retrieved from the SQLite database and displayed with their corresponding timestamps in a readable format.
+System Requirements
+A Unix/Linux-based environment (such as Raspberry Pi Desktop, macOS, or Linux).
+C++ compiler (e.g., g++).
+SQLite development libraries.
+Build Instructions
+Set Up Environment: Ensure that the necessary tools (C++ compiler and SQLite) are installed in your system.
+Compile the Project: Use the provided Makefile to compile the logger and log_message classes, along with the generator and dumper applications:
+bash
+Copy code
+make
+Run the Generator: Run the generator app to start logging messages:
+bash
+Copy code
+./generator "Message 1" "Message 2" "Message 3"
+Run the Dumper: To view the logged messages, use the dumper app:
+bash
+Copy code
+./dumper app_name
+This project demonstrates a straightforward approach to logging and database interaction, useful for applications that need lightweight logging and data storage.
